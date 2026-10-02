@@ -13,7 +13,7 @@ export function _create_Card(..._cards) {
         _card_Element.innerHTML = `
             <div class='card_innerContainer'>
                 <span class='card_title' data-i18n='${_card[1]}'></span>
-                <img title='${_card[4]}' src={`/media/imgs/${_card[2]}`}>
+                <img title='${_card[4]}' src='/media/imgs/${_card[2]}'>
                 <span class='card_text' data-i18n='${_card[3]}'></span>
             </div>
         `;
