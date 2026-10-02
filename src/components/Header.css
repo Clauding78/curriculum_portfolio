@@ -1,0 +1,410 @@
+:root {
+    --header_height: 75px;
+    --thumbnail_height: 250px;
+
+    --sub_layer_bg_color: rgba(52, 52, 52, 0.767);
+}
+
+.offline_banner {
+    display: none;
+}
+
+.offline_banner.active {
+    display: block;
+
+    height: 30px;
+    align-content: center;
+
+    background-color: rgb(245, 245, 0);
+}
+
+.offline_banner.active span {
+    margin-left: 20px;
+
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: verdana;
+}
+
+.thumbnail {
+    height: var(--thumbnail_height);
+}
+
+.top {
+    position: sticky;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    z-index: 999;
+}
+
+.Container_full_top {
+    position: relative; /* bcuz of _fullPage_dropDownMenu */
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+
+    position: relative; /* nav */
+
+    max-height: var(--header_height); /* max-height to prevent shaking */
+    width: 100%;
+
+    background-color: var(--main_color);
+}
+
+/* for <a> tag */
+.Container_site_title {
+    width: 200px;
+}
+
+.site_title {
+    display: inline-block;
+    height: 100%;
+
+    padding-inline: 30px;
+
+    align-content: center;
+
+    color: white;
+    font-size: 4.5rem;
+}
+
+header nav {
+    display: flex;
+    flex-direction: row;
+
+    position: absolute;
+    right: 125px;
+
+    height: 100%;
+}
+
+header nav a {
+    position: relative;
+
+    /* inline-block to change sizing, padding, marging ... */
+    display: block;
+    padding-inline: 20px;
+
+    height: 100%;
+
+    align-content: center;
+}
+
+header nav a span, ._fullPage_dropDownMenu nav a span {
+    position: relative; /* ::after */
+
+    color: white;
+    font-family: verdana;
+    font-size: 2rem;
+
+    transition: 0.3s ease;
+}
+
+header nav a:hover span, header nav a span.active, ._fullPage_dropDownMenu nav a:hover span {
+    color: var(--link_main_color);
+}
+
+.header_nav_links_dropdown {
+    visibility: hidden;
+
+    position: absolute;
+    top: calc(var(--header_height) - 8px);
+    left: 0;
+
+    padding-top: 20px;
+
+    height: 100vh;
+    width: 100%;
+
+    background-color: var(--sub_layer_bg_color);
+
+    z-index: 999;
+}
+
+.header_nav_links_dropdown.open {
+    visibility: visible;
+}
+
+.HNLD_ul {
+    display: flex;
+    flex-direction: row;
+
+    margin-left: 50px;
+}
+
+.HNLD_ul li {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    width: 350px;
+
+    padding-top: 10px;
+}
+
+.HNLD_ul li:not(:last-child)::after {
+    position: absolute;
+    top: 10px;
+    right: 0;
+
+    content: '';
+    height: 300px;
+    width: 2.5px;
+
+    background-color: white;
+}
+
+:root {
+    --HNLD_gap_left: 10px;
+}
+
+.HNLD_ul_block_title {
+    padding-left: calc(1.5 * var(--HNLD_gap_left));
+    
+    font-size: 2rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.HNLD_ul nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.HNLD_ul nav a {
+    display: block;
+
+    height: 3.5rem;
+
+    color: var(--link_main_color);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+    transition: 2s ease;
+}
+
+.HNLD_ul nav span {
+    font-size: 2rem;
+}
+
+.HNLD_ul nav a:hover span {
+    color: blueviolet;
+    font-size: 2.2rem;
+}
+
+.HNLD_ul nav span {
+    padding: 10px calc(2 * var(--HNLD_gap_left));
+}
+
+@media (min-width: 601px) {
+    .Container_full_top:has(header nav a:hover, .header_nav_links_dropdown:hover) .header_nav_links_dropdown {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+header .languageSelect {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+}
+
+._fullPage_dropDownMenu {
+    display: none;
+}
+
+
+/* the idea is to trigger underline after this */
+@media (min-width: 1000px) {
+    header nav a span::after {
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+
+        height: 1.5px;
+        width: 0;
+
+        content: '';
+        transition: width 0.3s ease;
+
+        background-color: white;
+    }
+
+    /* whole <a> block triggers */
+    header nav a:hover span::after {
+        width: 100%;
+    }
+}
+
+
+
+
+
+@media (max-width: 1000px) {
+    :root {
+        --sub_nav_height: 50px;
+    }
+
+    header {
+        display: grid;
+        grid-template-rows: var(--header_height) var(--sub_nav_height);
+
+        max-height: calc(var(--header_height) + var(--sub_nav_height));
+    }
+
+    header nav {
+        position: static; /* to terminate absolute properties remaining */
+
+        width: 100%;
+
+        background-color: color-mix(in hsl, var(--main_color), 5% white);
+    }
+
+    .header_nav_links_dropdown {
+        top: calc((var(--header_height) + var(--sub_nav_height)));
+    }
+}
+
+@media (max-width: 600px) {
+            /* try to fix */
+    /* removed :: , .Container_site_title */
+    header {
+        max-height: var(--header_height);
+    }
+
+    /* job to dropdown nav */
+    header nav {
+        display: none;
+    }
+
+    /* job to dropdown nav */
+    header .languageSelect {
+        display: none;
+    }
+
+    .header_ham_menu_button {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        justify-content: center;
+        align-items: center;
+
+        position: absolute;
+        right: 0;
+        
+        height: var(--header_height);
+        width: var(--header_height);
+
+        transition: 0.3s ease;
+    }
+
+    .header_ham_menu_button div {
+        height: 4px;
+        width: 70%;
+
+        border-radius: 15px;
+
+        transition: 0.3s;
+
+        background-color: white;
+    }
+
+    .change .HMI_bar_1 {
+        transform: translate(0, 11px) rotate(-45deg);
+    }
+
+    .change .HMI_bar_2 {
+        opacity: 0;
+    }
+
+    .change .HMI_bar_3 {
+        transform: translate(0, -16px) rotate(45deg);
+    }
+
+    :root {
+        --dropDown_bg: #353535;
+    }
+
+    .header_ham_menu_button.change {
+        background-color: color-mix(in hsl, var(--dropDown_bg), 15% black);
+    }
+
+    .header_ham_menu_button:hover {
+        background-color: var(--dropDown_bg);
+    }
+    
+    ._fullPage_dropDownMenu.active {
+        display: inline-block;
+
+        position: absolute;
+        top: var(--header_height); /* initial */
+        left: 0;
+
+        height: calc(100vh - var(--header_height));
+        width: 100%;
+
+        background-color: var(--sub_layer_bg_color);
+
+        z-index: 999;
+    }
+
+                                            /* try fix */
+    body:has(._fullPage_dropDownMenu.active), body:has(.header_nav_links_dropdown.open) {
+        overflow: hidden;
+    }
+
+    ._fullPage_dropDownMenu.active main::-webkit-scrollbar {
+        height: 100%
+    }
+
+    ._fullPage_dropDownMenu nav, ._fullPage_dropDownMenu select {
+        width: 100%;
+    }
+
+    ._fullPage_dropDownMenu nav {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5px;
+    }
+
+    ._fullPage_dropDownMenu nav a, ._fullPage_dropDownMenu select {
+        padding: 10px 20px;
+    }
+
+    ._fullPage_dropDownMenu nav a span, ._fullPage_dropDownMenu select {
+        color: white;
+        font-family: calibri;
+        font-size: 2.5rem;
+    }
+
+
+
+    /* warning :: duplicate code - clear later */
+    ._fullPage_dropDownMenu nav a span::after {
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+
+        height: 1.5px;
+        width: 0;
+
+        content: '';
+        transition: width 0.3s ease;
+
+        background-color: white;
+    }
+
+    ._fullPage_dropDownMenu nav a:hover span::after {
+        width: 100%;
+    }
+
+    ._fullPage_dropDownMenu select, ._fullPage_dropDownMenu select option {
+        background-color: var(--sub_layer_bg_color);
+    }
+}
