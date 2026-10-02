@@ -4,6 +4,7 @@ import App from './App.jsx';
 
 import './main.css';
 
+import './js/main.js';
 import './js/language.js';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
