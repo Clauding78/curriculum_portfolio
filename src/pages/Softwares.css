@@ -1,0 +1,4 @@
+.software_List li span {
+    display: flex;
+    flex-direction: column;
+}
